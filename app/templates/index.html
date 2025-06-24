@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>振徳高校 ランチ注文アプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🍱 振徳高校 ランチ注文</h1>
+        <div class="cart-summary">
+            <a href="{{ url_for('confirm') }}">カートを見る (<span id="cart-count">{{ cart | length }}</span>)</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="menu-list">
+            <h2>今日のおすすめランチ</h2>
+            <div class="products-grid">
+                {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/' + product.image_url) }}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <p class="price">¥{{ product.price | int }}</p>
+                    <p class="description">{{ product.description }}</p>
+                    <div class="add-to-cart-controls">
+                        <button class="quantity-minus" data-id="{{ product.id }}">-</button>
+                        <input type="number" class="quantity-input" data-id="{{ product.id }}" value="1" min="1" max="10">
+                        <button class="quantity-plus" data-id="{{ product.id }}">+</button>
+                        <button class="add-button" data-id="{{ product.id }}">カートに追加</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="cart-preview">
+            <h2>現在のカート</h2>
+            <div id="current-cart-items">
+                {% if cart %}
+                    {% for item in cart %}
+                    <div class="cart-item-preview">
+                        <span>{{ item.name }} x {{ item.quantity }}</span>
+                        <span>¥{{ (item.price * item.quantity) | int }}</span>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>カートはまだ空っぽです。</p>
+                {% endif %}
+            </div>
+            {% if cart %}
+            <div class="cart-actions">
+                <a href="{{ url_for('confirm') }}" class="button primary-button">注文内容を確認する</a>
+            </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 振徳高校 ランチアプリ</p>        /* ...既存のコード... */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2列に設定 */
+            gap: 24px; /* カード間のスペース */
+        }
+        /* ...既存のコード... */
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

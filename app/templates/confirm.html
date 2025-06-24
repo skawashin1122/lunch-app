@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注文確認 - 振徳高校 ランチ注文アプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🍱 注文内容の確認 🍱</h1>
+    </header>
+
+    <main>
+        <section class="order-summary">
+            <h2>ご注文内容</h2>
+            {% if cart %}
+            <div class="cart-items-list">
+                {% for item in cart %}
+                <div class="cart-item">
+                    <img src="{{ url_for('static', filename='images/' + item.image_url) }}" alt="{{ item.name }}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h3>{{ item.name }}</h3>
+                        <p>単価: ¥{{ item.price | int }}</p>
+                        <div class="quantity-controls">
+                            <button class="update-quantity-button" data-id="{{ item.id }}" data-action="minus">-</button>
+                            <input type="number" value="{{ item.quantity }}" min="1" class="cart-quantity-input" data-id="{{ item.id }}">
+                            <button class="update-quantity-button" data-id="{{ item.id }}" data-action="plus">+</button>
+                        </div>
+                        <button class="remove-item-button" data-id="{{ item.id }}">削除</button>
+                    </div>
+                    <p class="cart-item-subtotal">小計: ¥{{ (item.price * item.quantity) | int }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="order-total">
+                <p>合計金額: <span class="total-price">¥{{ total_price | int }}</span></p>
+            </div>
+
+            <form action="{{ url_for('checkout') }}" method="POST" class="checkout-form">
+                <div class="form-group">
+                    <label for="customer_name">お名前 (任意):</label>
+                    <input type="text" id="customer_name" name="customer_name" placeholder="例: 翔太">
+                </div>
+                <button type="submit" class="button primary-button big-button">これで注文する！</button>
+            </form>
+            {% else %}
+            <p>カートに商品がありません。<a href="{{ url_for('index') }}">メニューに戻る</a></p>
+            {% endif %}
+        </section>
+
+        <div class="back-link">
+            <a href="{{ url_for('index') }}">◀ 買い物を続ける</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 振徳高校 ランチアプリ</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

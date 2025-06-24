@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注文完了 - 振徳高校 ランチ注文アプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🎉 注文完了！ 🎉</h1>
+    </header>
+
+    <main>
+        <section class="order-result">
+            {% if success %}
+            <p class="success-message">ご注文ありがとうございました！</p>
+            <p>注文番号: <strong>#{{ order_id }}</strong></p>
+            <p>準備ができ次第、購買にてお渡しします。楽しみにしててね！</p>
+            {% else %}
+            <p class="error-message">{{ message }}</p>
+            {% endif %}
+            <div class="actions">
+                <a href="{{ url_for('index') }}" class="button primary-button">トップページに戻る</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 振徳高校 ランチアプリ</p>
+    </footer>
+</body>
+</html>

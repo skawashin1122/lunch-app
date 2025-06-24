@@ -1,0 +1,537 @@
+/* Google Fonts - Noto Sans JP */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #1976D2;      /* メインの青 */
+    --secondary-color: #FFD700;    /* サブカラー（金） */
+    --accent-color: #212121;       /* アクセント（黒） */
+    --background-color: #F3F7FB;   /* 薄い青背景 */
+    --text-color: #1A237E;         /* 濃い青系テキスト */
+    --card-bg: #FFFFFF;            /* 白 */
+    --border-color: #BDBDBD;       /* アクセント（グレー） */
+    --button-hover: #1565C0;       /* ボタンホバー時の濃い青 */
+    --gray: #757575;               /* アクセント（グレー） */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.cart-summary a {
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cart-summary a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+main {
+    background-color: var(--card-bg);
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+section {
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3列に変更 */
+    gap: 24px; /* カード間のスペース */
+}
+
+.product-card {
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.product-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-card .price {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
+
+.product-card .description {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* descが長いときにレイアウトを崩さない */
+}
+
+.add-to-cart-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.quantity-minus, .quantity-plus {
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.quantity-minus:hover, .quantity-plus:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.quantity-input {
+    border: 1px solid var(--border-color);
+    width: 60px;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.add-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.add-button:hover {
+    background-color: var(--button-hover);
+}
+
+.cart-preview {
+    margin-top: 3rem;
+}
+
+.cart-preview h2 {
+    margin-top: 0;
+}
+
+#current-cart-items {
+    border: 1px dashed var(--border-color);
+    padding: 1rem;
+    border-radius: 8px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.cart-item-preview {
+    color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cart-item-preview span:first-child {
+    font-weight: bold;
+}
+
+.cart-actions {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.primary-button {
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+}
+
+.primary-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Confirm Page Specific Styles */
+.cart-items-list {
+    margin-top: 1.5rem;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-details h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+}
+
+.cart-item-details p {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-subtotal {
+    font-weight: bold;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    width: 100px; /* Adjust as needed */
+    text-align: right;
+}
+
+.order-total {
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px dashed var(--secondary-color);
+}
+
+.checkout-form {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.form-group input[type="text"] {
+    width: 70%;
+    max-width: 300px;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.big-button {
+    font-size: 1.3rem;
+    padding: 1rem 2rem;
+    min-width: 250px;
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.back-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.back-link a:hover {
+    color: var(--primary-color);
+}
+
+/* Result Page Styles */
+.order-result {
+    text-align: center;
+    padding: 3rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.order-result .success-message {
+    color: var(--secondary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.order-result .error-message {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.order-result p {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: #555;
+}
+
+.order-result strong {
+    color: var(--primary-color);
+}
+
+/* Quantity controls in confirm page */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+}
+
+.cart-quantity-input {
+    width: 50px;
+    padding: 0.3rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.update-quantity-button, .remove-item-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.update-quantity-button:hover {
+    background-color: #F0D050;
+}
+
+.remove-item-button {
+    background-color: #FFADAD; /* Light red for remove */
+    color: white;
+    margin-left: 1rem;
+}
+
+.remove-item-button:hover {
+    background-color: #FF9090;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto; /* Push footer to the bottom */
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    main {
+        padding: 1rem;
+        margin: 1rem auto;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr; /* スマホでは1列 */
+    }
+
+    .product-card {
+        padding: 1rem;
+    }
+
+    .product-card img {
+        height: 150px;
+    }
+
+    .add-to-cart-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .add-button {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-item-details {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .cart-item-image {
+        margin-bottom: 0.5rem;
+    }
+
+    .cart-item-subtotal {
+        width: auto;
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+
+    .quantity-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .remove-item-button {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+
+    .big-button {
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
